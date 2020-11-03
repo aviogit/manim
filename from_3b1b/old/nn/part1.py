@@ -2,6 +2,8 @@ import sys
 import os.path
 import cv2
 
+#from pprint import pprint
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from manimlib.imports import *
 
@@ -825,10 +827,16 @@ class PreviewMNistNetwork(NetworkScene):
         )
 
     def get_image_to_layer_one_animation(self, image, start_neurons):
+        #for pixel in image:
+        #    pprint(vars(pixel))
+        #    print('---------------------')
+        #    print(pixel.get_fill_rgbas())
+        #    print('---------------------')
         image_mover = VGroup(*[
             pixel.copy()
             for pixel in image
-            if pixel.fill_rgb[0] > 0.1
+            if pixel.get_fill_rgbas()[0][0] > 0.1
+            #if pixel.fill_rgb[0] > 0.1
         ])
         return Transform(
             image_mover, start_neurons, 
